@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<charge-order xmlns="http://checkout.google.com/schema/2" google-order-number="6014423719">
+    <amount currency="USD">335.55</amount>
+</charge-order>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<authorization-amount-notification xmlns="http://checkout.google.com/schema/2"
+    serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+    <google-order-number>841171949013218</google-order-number>
+    <authorization-amount currency="USD">226.06</authorization-amount>
+    <authorization-expiration-date>2006-03-18T20:25:31</authorization-expiration-date>
+    <avs-response>Y</avs-response>
+    <cvn-response>Y</cvn-response>
+    <timestamp>2006-03-18T20:25:31</timestamp>
+</authorization-amount-notification>

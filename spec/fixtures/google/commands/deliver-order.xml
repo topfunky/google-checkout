@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deliver-order xmlns="http://checkout.google.com/schema/2"
+    google-order-number="841171949013218">
+    <tracking-data>
+        <carrier>UPS</carrier>
+        <tracking-number>Z5498W45987123684</tracking-number>
+    </tracking-data>
+    <send-email>false</send-email>
+</deliver-order>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<risk-information-notification xmlns="http://checkout.google.com/schema/2"
+    serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+    <google-order-number>841171949013218</google-order-number>
+    <risk-information>
+        <eligible-for-protection>true</eligible-for-protection>
+        <billing-address id="BuyerBillingAddress">
+            <contact-name>John Smith</contact-name>
+            <email>johnsmith@example.com</email>
+            <address1>10 Example Road</address1>
+            <city>Sampleville</city>
+            <region>CA</region>
+            <postal-code>94141</postal-code>
+            <country-code>US</country-code>
+        </billing-address>
+        <avs-response>Y</avs-response>
+        <cvn-response>M</cvn-response>
+        <partial-cc-number>3719</partial-cc-number>
+        <ip-address>10.11.12.13</ip-address>
+        <buyer-account-age>6</buyer-account-age>
+    </risk-information>
+    <timestamp>2006-01-15T10:44:06</timestamp>
+</risk-information-notification>

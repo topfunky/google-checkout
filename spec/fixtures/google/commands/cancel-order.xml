@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cancel-order xmlns="http://checkout.google.com/schema/2" google-order-number="841171949013218">
+    <reason>Buyer cancelled the order.</reason>
+    <comment>Buyer ordered another item.</comment>
+</cancel-order>

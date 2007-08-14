@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<charge-amount-notification xmlns="http://checkout.google.com/schema/2"
+    serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+    <google-order-number>841171949013218</google-order-number>
+    <latest-charge-amount currency="USD">226.06</latest-charge-amount>
+    <total-charge-amount currency="USD">226.06</total-charge-amount>
+    <timestamp>2006-03-18T18:25:31</timestamp>
+</charge-amount-notification>

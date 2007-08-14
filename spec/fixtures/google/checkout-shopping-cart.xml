@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkout-shopping-cart xmlns="http://checkout.google.com/schema/2">
+  <shopping-cart>
+    <items>
+      <item>
+        <item-name>HelloWorld 2GB MP3 Player</item-name>
+        <item-description>HelloWorld, the simple MP3 player</item-description>
+        <unit-price currency="USD">159.99</unit-price>
+        <quantity>1</quantity>
+      </item>
+    </items>
+  </shopping-cart>
+  <checkout-flow-support>
+    <merchant-checkout-flow-support>
+      <shipping-methods>
+        <flat-rate-shipping name="SuperShip Ground">
+          <price currency="USD">9.99</price>
+        </flat-rate-shipping>
+      </shipping-methods>
+    </merchant-checkout-flow-support>
+  </checkout-flow-support>
+</checkout-shopping-cart>

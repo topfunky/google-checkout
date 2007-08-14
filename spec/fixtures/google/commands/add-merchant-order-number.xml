@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add-merchant-order-number xmlns="http://checkout.google.com/schema/2"
+    google-order-number="841171949013218">
+    <merchant-order-number>P6502-53-7861SBJD</merchant-order-number>
+</add-merchant-order-number>

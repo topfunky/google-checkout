@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error xmlns="http://checkout.google.com/schema/2"
+    serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+    <error-message>Bad username and/or password for API Access.</error-message>
+</error>
