@@ -36,3 +36,5 @@ spec/google-checkout/response_spec.rb
 spec/google-checkout_spec.rb
 spec/spec_helper.rb
 support/cacert.pem
+examples/google_notifications_controller.rb
+MIT-LICENSE.txt

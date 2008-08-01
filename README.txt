@@ -94,7 +94,7 @@ with a cart full of the products you specified, and your work is done.
 == Missing Features
 
 * Level 1 integration is complete except for tax tables
-* Level 2 integration is missing.  
+* Level 2 integration has been partly implemented and is in use at http://peepcode.com.  
 
 See
 http://checkout.google.com/support/sell/bin/answer.py?answer=42917&topic=8671
@@ -104,9 +104,7 @@ If there are missing features I haven't thought of, let me know.
 
 == Bugs
 
-No 'hard' bugs, I hope.  My contact information is at the bottom of the page
-if you find one.  There may be more subjective bugs (e.g., design issues);
-feel free to tell me about these, too.
+No 'hard' bugs, I hope.  Pete's contact information is at the bottom of the page if you find one.  There may be more subjective bugs (e.g., design issues); feel free to tell me about these, too.
 
 == Contact Information
 
