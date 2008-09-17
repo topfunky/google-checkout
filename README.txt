@@ -10,6 +10,10 @@ payment at http://peepcode.com.
 == Installation
 
   sudo gem install google-checkout
+  
+Or straight from the source at
+
+  sudo gem install topfunky-google-checkout --source http://gems.github.com
 
 == What is Google Checkout?
 
