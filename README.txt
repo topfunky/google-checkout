@@ -4,8 +4,7 @@ google-checkout
 
 == DESCRIPTION:
   
-Experimental library for working with GoogleCheckout. Currently in use for
-payment at http://peepcode.com.
+Experimental library for working with GoogleCheckout. Currently in use for payment at http://peepcode.com.
 
 == Installation
 

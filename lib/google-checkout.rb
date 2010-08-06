@@ -9,7 +9,7 @@ $: << File.dirname(__FILE__) + "/vendor/ruby-hmac/lib"
 
 require 'rubygems'
 
-require 'hmac-sha1'
+require 'openssl'
 require 'base64'
 require 'builder/xmlmarkup'
 require 'hpricot'

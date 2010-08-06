@@ -265,16 +265,18 @@ module GoogleCheckout
       # library can't convert between
       # currencies.
       @currency ||=
-      (@contents.map { |item|
-        item.currency
-      }.uniq.first rescue nil) ||
-      'USD'
+        (@contents.map { |item|
+           item.currency
+         }.uniq.first rescue nil) ||
+        'USD'
     end
 
     # Returns the signature for the cart XML.
     def signature
       @xml or to_xml
-      HMAC::SHA1.digest(@merchant_key, @xml)
+
+      digest  = OpenSSL::Digest::Digest.new('sha1')
+      OpenSSL::HMAC.digest(digest, @merchant_key, @xml)
     end
 
     # Returns HTML for a checkout form for buying all the items in the
@@ -284,28 +286,28 @@ module GoogleCheckout
       burl = button_url(button_opts)
       html = Builder::XmlMarkup.new(:indent => 2)
       html.form({
-        :action => submit_url,
-        :style => 'border: 0;',
-        :id => 'BB_BuyButtonForm',
-        :method => 'post',
-        :name => 'BB_BuyButtonForm'
-      }) do
+                  :action => submit_url,
+                  :style => 'border: 0;',
+                  :id => 'BB_BuyButtonForm',
+                  :method => 'post',
+                  :name => 'BB_BuyButtonForm'
+                }) do
         html.input({
-          :name => 'cart',
-          :type => 'hidden',
-          :value => Base64.encode64(@xml).gsub("\n", '')
-        })
+                     :name => 'cart',
+                     :type => 'hidden',
+                     :value => Base64.encode64(@xml).gsub("\n", '')
+                   })
         html.input({
-          :name => 'signature',
-          :type => 'hidden',
-          :value => Base64.encode64(signature).gsub("\n", '')
-        })
+                     :name => 'signature',
+                     :type => 'hidden',
+                     :value => Base64.encode64(signature).gsub("\n", '')
+                   })
         html.input({
-          :alt => 'Google Checkout',
-          :style => "width: auto;",
-          :src => button_url(button_opts),
-          :type => 'image'
-        })
+                     :alt => 'Google Checkout',
+                     :style => "width: auto;",
+                     :src => button_url(button_opts),
+                     :type => 'image'
+                   })
       end
     end
 

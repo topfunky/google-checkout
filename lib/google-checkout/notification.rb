@@ -32,9 +32,13 @@ module GoogleCheckout
       doc = Hpricot.XML(raw_xml)
 
       # Convert +request-received+ to +request_received+,
-      # then to a +RequestReceived+ object of the proper class 
+      # then to a +RequestReceived+ object of the proper class
       # which will be created and returned.
-      const_name = Inflector.camelize(doc.root.name.gsub('-', '_'))
+      inflector_klass = Inflector rescue nil
+      if inflector_klass.nil?
+        inflector_klass = ActiveSupport::Inflector
+      end
+      const_name = inflector_klass.camelize(doc.root.name.gsub('-', '_'))
       if GoogleCheckout.const_get(const_name)
         return GoogleCheckout.const_get(const_name).new(doc)
       end
@@ -87,7 +91,7 @@ module GoogleCheckout
 
     ##
     # Returns the serial number from the root element.
-    
+
     def serial_number
       doc.root['serial-number']
     end
@@ -100,14 +104,14 @@ module GoogleCheckout
       xml = Builder::XmlMarkup.new
       xml.instruct!
       @xml = xml.tag!('notification-acknowledgment', {
-        :xmlns => "http://checkout.google.com/schema/2"
-      })
+                        :xmlns => "http://checkout.google.com/schema/2"
+                      })
       @xml
     end
 
     ##
     # Returns true if this is a GoogleCheckout::Error object.
-    
+
     def error?
       self.class == GoogleCheckout::Error
     end
@@ -152,27 +156,37 @@ module GoogleCheckout
 
   end
 
-  class ChargebackAmountNotification < Notification; end
+  class ChargebackAmountNotification < Notification
+
+    def latest_chargeback_amount
+      (@doc/"latest-chargeback-amount").to_money
+    end
+    
+    def total_chargeback_amount
+      (@doc/"total-chargeback-amount").to_money
+    end
+
+  end
 
   class NewOrderNotification < Notification
 
     ##
     # Returns a Money object representing the total price of the order.
-    
+
     def order_total
       (@doc/"order-total").to_money
     end
 
     ##
     # Returns a Money object representing the total tax added.
-    
+
     def total_tax
       (@doc/"total-tax").to_money
     end
 
     ##
     # Returns true if the buyer wants to received marketing emails.
-    
+
     def email_allowed
       (@doc/"buyer-marketing-preferences"/"email-allowed").to_boolean
     end

@@ -1,0 +1,5 @@
+if [[ -s "/Users/topfunky/.rvm/environments/ree-1.8.6-20090610@google-checkout" ]] ; then
+  . "/Users/topfunky/.rvm/environments/ree-1.8.6-20090610@google-checkout"
+else
+  rvm --create use  "ree-1.8.6-20090610@google-checkout"
+fi

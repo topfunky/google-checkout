@@ -43,7 +43,7 @@ describe GoogleCheckout, "New Order Notification" do
   it "should create Money object from order total" do
     @notification.order_total.should be_kind_of(Money)
     @notification.order_total.cents.should == 19098
-    @notification.order_total.currency.should == 'USD'
+    @notification.order_total.currency.iso_code.should == 'USD'
   end
 
   it "should throw error when accessing non-existent value" do
@@ -153,8 +153,14 @@ describe GoogleCheckout, "Chargeback Amount Notification" do
 
   it_should_behave_like "basic notification"
 
-  it "should identify type of notification" do
+  it "identifies type of notification" do
     @notification.should be_kind_of(GoogleCheckout::ChargebackAmountNotification)
+  end
+
+  it "parses chargeback amounts as money objects" do
+    @notification.latest_chargeback_amount.cents.should == 22606
+    @notification.total_chargeback_amount.cents.should == 22606
+    @notification.latest_chargeback_amount.currency.iso_code.should == "USD"
   end
 
 end

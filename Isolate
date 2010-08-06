@@ -1,0 +1,11 @@
+
+gem "builder"
+gem "hpricot"
+gem "money", ">= 3.0"
+gem "activesupport"
+
+env :test do
+  gem "rspec"
+end
+
+
