@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order-state-change-notification xmlns="http://checkout.google.com/schema/2"
+    serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+    <google-order-number>861501633833620</google-order-number>
+    <new-financial-order-state>CHARGING</new-financial-order-state>
+    <new-fulfillment-order-state>NEW</new-fulfillment-order-state>
+    <previous-financial-order-state>CHARGEABLE</previous-financial-order-state>
+    <previous-fulfillment-order-state>NEW</previous-fulfillment-order-state>
+    <reason>The reason goes here, if there is one.</reason>
+    <timestamp>2006-05-03T17:32:11</timestamp>
+</order-state-change-notification>

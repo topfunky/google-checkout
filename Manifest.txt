@@ -1,7 +1,10 @@
 History.txt
+Isolate
+MIT-LICENSE.txt
 Manifest.txt
 README.txt
 Rakefile
+examples/google_notifications_controller.rb
 lib/duck_punches/hpricot.rb
 lib/google-checkout.rb
 lib/google-checkout/cart.rb
@@ -36,5 +39,3 @@ spec/google-checkout/response_spec.rb
 spec/google-checkout_spec.rb
 spec/spec_helper.rb
 support/cacert.pem
-examples/google_notifications_controller.rb
-MIT-LICENSE.txt
