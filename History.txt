@@ -1,3 +1,8 @@
+== 0.5.0 / 2011-02-08
+
+* Use Nokogiri
+  * Use Nokogiri instead of Hpricot
+
 == 0.2.0 / 2007-08-14
 
 * Significant rewrite!

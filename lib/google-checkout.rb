@@ -30,7 +30,7 @@ require 'google-checkout/cart'
 
 module GoogleCheckout
 
-  VERSION = '0.3.0'
+  VERSION = '0.5.0'
 
   @@live_system = true
   
