@@ -1,3 +1,9 @@
+== 0.5.1 / 2011-02-08
+
+* Bugfix
+  * Include missing fixture file for apps that 
+    need to use it for tests.
+
 == 0.5.0 / 2011-02-08
 
 * Use Nokogiri
