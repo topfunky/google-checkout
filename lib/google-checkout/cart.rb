@@ -157,6 +157,22 @@ module GoogleCheckout
       item
     end
 
+    # Remove an item
+    def remove_item(index)
+      @contents.delete_at(index)
+      @xml = nil
+    end
+
+    # expose the XML
+    def xml
+      @xml
+    end
+
+    # expose the contents
+    def contents
+      @contents
+    end
+
     # This is the important method; it generatest the XML call.
     # It's fairly lengthy, but trivial.  It follows the docs at
     # http://code.google.com/apis/checkout/developer/index.html#checkout_api
