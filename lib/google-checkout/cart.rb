@@ -157,6 +157,22 @@ module GoogleCheckout
       item
     end
 
+    # Remove an item
+    def remove_item(index)
+      @contents.delete_at(index)
+      @xml = nil
+    end
+
+    # expose the XML
+    def xml
+      @xml
+    end
+
+    # expose the contents
+    def contents
+      @contents
+    end
+
     # This is the important method; it generatest the XML call.
     # It's fairly lengthy, but trivial.  It follows the docs at
     # http://code.google.com/apis/checkout/developer/index.html#checkout_api
@@ -174,6 +190,9 @@ module GoogleCheckout
               xml.item {
                 if item.key?(:item_id)
                   xml.tag!('merchant-item-id', item[:item_id])
+                end
+                if item.key?(:weight)
+                  xml.tag!('item-weight', :unit => "LB", :value => item[:weight])
                 end
                 xml.tag!('item-name') {
                   xml.text! item[:name].to_s
@@ -225,14 +244,82 @@ module GoogleCheckout
             #      Does anyone care to send a patch to enhance
             #      this for more flexibility?
             xml.tag!('shipping-methods') {
-              xml.tag!('pickup', :name =>'Digital Download') {
-                xml.tag!('price', "0.00", :currency => currency)
-              }
+              if (@shipping)
+                xml.tag!('carrier-calculated-shipping') {
+                  xml.tag!('carrier-calculated-shipping-options') {
+                    xml.tag!('carrier-calculated-shipping-option') {
+                      xml.tag!('shipping-company') {
+                        xml.text! @shipping[:shipping_company]
+                      }
+                      xml.tag!('shipping-type') {
+                        xml.text! @shipping[:shipping_type]
+                      }
+                      xml.tag!('price', :currency => currency) {
+                        xml.text! @shipping[:price]
+                      }
+                      if @shipping[:additional_fixed_charge]
+                        xml.tag!('additional-fixed-charge', :currency => currency) {
+                          xml.text! @shipping[:additional_fixed_charge]
+                        }
+                      end
+                      if @shipping[:additional_variable_charge_percent]
+                        xml.tag!('additional-variable-charge-percent') {
+                          xml.text! @shipping[:additional_variable_charge_percent]
+                        }
+                      end
+                    }
+                  }
+                  xml.tag!('shipping-packages') {
+                    xml.tag!('shipping-package') {
+                      xml.tag!('ship-from', :id => "id") {
+                        xml.tag!('city') {
+                          xml.text! @shipping[:city]
+                        }
+                        xml.tag!('region') {
+                          xml.text! @shipping[:region]
+                        }
+                        xml.tag!('postal-code') {
+                          xml.text! @shipping[:postal_code]
+                        }
+                        xml.tag!('country-code') {
+                          xml.text! @shipping[:country_code]
+                        }
+                      }
+                    }
+                  }
+                }
+              else
+                xml.tag!('pickup', :name =>'Digital Download') {
+                  xml.tag!('price', "0.00", :currency => currency)
+                }
+              end
             }
           }
         }
       }
       @xml.dup
+    end
+
+    # Fill up the @shipping object
+    # See http://code.google.com/apis/checkout/developer/Google_Checkout_XML_API_Carrier_Calculated_Shipping.html
+    # Options, with sample values, are:
+    #   Required:
+    #     :shipping_company => "UPS"
+    #     :shipping_type => "Ground"
+    #     :city => "Seattle"
+    #     :region => "WA"
+    #     :postal_code => "98117"
+    #     :country_code => "US"
+    #     :price => 200
+    #   Optional:
+    #     :additional_fixed_charge => 10
+    #     :additional_variable_charge_percent => 5
+    def shipping_options(options={})
+      @shipping = options
+    end
+
+    def shipping
+      @shipping
     end
 
     # Generates the XML for the shipping cost, conditional on
