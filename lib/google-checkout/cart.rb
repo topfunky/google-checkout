@@ -344,7 +344,7 @@ module GoogleCheckout
       end
 
       # TODO Use /checkout/buttons/checkout.gif if in sandbox.
-      "http://#{submit_domain}/#{ subdir }buttons/#{bname}?#{path}"
+      "https://#{submit_domain}/#{ subdir }buttons/#{bname}?#{path}"
     end
   end
 

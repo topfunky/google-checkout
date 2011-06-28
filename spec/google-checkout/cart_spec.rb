@@ -13,20 +13,20 @@ describe GoogleCheckout, "Cart (generic)" do
 
   it "should generate proper live buy button_url" do
     GoogleCheckout.use_production
-    @cart.button_url.should match(%r{http://checkout\.google\.com/buttons/buy\.gif})
+    @cart.button_url.should match(%r{https://checkout\.google\.com/buttons/buy\.gif})
   end
 
   it "should generate proper live checkout button_url" do
     GoogleCheckout.use_production
-    @cart.button_url(:buy_or_checkout => :checkout).should match(%r{http://checkout\.google\.com/buttons/checkout\.gif})
+    @cart.button_url(:buy_or_checkout => :checkout).should match(%r{https://checkout\.google\.com/buttons/checkout\.gif})
   end
 
   it "should generate proper sandbox buy button_url" do
-    @cart.button_url.should match(%r{http://sandbox\.google\.com/buttons/buy\.gif})
+    @cart.button_url.should match(%r{https://sandbox\.google\.com/buttons/buy\.gif})
   end
 
   it "should generate proper sandbox checkout button_url" do
-    @cart.button_url(:buy_or_checkout => :checkout).should match(%r{http://sandbox\.google\.com/checkout/buttons/checkout\.gif})
+    @cart.button_url(:buy_or_checkout => :checkout).should match(%r{https://sandbox\.google\.com/checkout/buttons/checkout\.gif})
   end
 
   it "should generate checkout button" do
