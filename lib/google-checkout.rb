@@ -12,7 +12,7 @@ require 'rubygems'
 require 'openssl'
 require 'base64'
 require 'builder/xmlmarkup'
-require 'hpricot'
+require 'nokogiri'
 require 'money'
 require 'net/https'
 require 'active_support'
@@ -30,7 +30,7 @@ require 'google-checkout/cart'
 
 module GoogleCheckout
 
-  VERSION = '0.3.0'
+  VERSION = '0.5.1'
 
   @@live_system = true
   

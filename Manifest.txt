@@ -26,6 +26,7 @@ spec/fixtures/google/notifications/authorization-amount-notification.xml
 spec/fixtures/google/notifications/charge-amount-notification.xml
 spec/fixtures/google/notifications/chargeback-amount-notification.xml
 spec/fixtures/google/notifications/new-order-notification.xml
+spec/fixtures/google/notifications/order-state-change-notification-missing.xml
 spec/fixtures/google/notifications/order-state-change-notification.xml
 spec/fixtures/google/notifications/refund-amount-notification.xml
 spec/fixtures/google/notifications/risk-information-notification.xml

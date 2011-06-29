@@ -1,11 +1,13 @@
 
 gem "builder"
-gem "hpricot"
+gem "nokogiri"
 gem "money", ">= 3.0"
 gem "activesupport"
 
-env :test do
-  gem "rspec"
+env :development, :test do
+  gem "hoe",        "2.8"
+  gem "hoe-doofus", "1.0.0"
+  gem "hoe-git",    "1.3.0"
+  gem "rspec",      "1.3.0"
 end
-
 

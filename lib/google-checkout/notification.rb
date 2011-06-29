@@ -13,13 +13,13 @@ module GoogleCheckout
   #     do_something_with_new_order
   #   end
   #
-  # TODO Document field access and Hpricot object access.
+  # TODO Document field access and Nokogiri object access.
   #
   # For the details, see http://code.google.com/apis/checkout/developer/index.html
 
   class Notification
 
-    # The Hpricot XML document received from Google.
+    # The Nokogiri XML document received from Google.
     attr_accessor :doc
 
     ##
@@ -29,7 +29,7 @@ module GoogleCheckout
     # the XML received.
 
     def self.parse(raw_xml)
-      doc = Hpricot.XML(raw_xml)
+      doc = Nokogiri::XML(raw_xml)
 
       # Convert +request-received+ to +request_received+,
       # then to a +RequestReceived+ object of the proper class
@@ -122,13 +122,13 @@ module GoogleCheckout
     #   notification.google_order_number
     #   => Returns value of '<google-order-number>'
     #
-    # Because of how Hpricot#at works, it will even dig into subtags
+    # Because of how Nokogiri#at works, it will even dig into subtags
     # and return the value of the first matching tag. For example,
     # there is an +email+ field in +buyer-shipping-address+ and also
     # in +buyer-billing-address+, but only the first will be returned.
     #
     # If you want to get at a value explicitly, use +notification.doc+
-    # and search the Hpricot document manually.
+    # and search the Nokogiri document manually.
 
     def method_missing(method_name, *args)
       element_name = method_name.to_s.gsub(/_/, '-')

@@ -1,5 +1,5 @@
 
-class Hpricot::Elements
+class Nokogiri::XML::NodeSet
 
   ##
   # Assume a Google standard money node with a currency attribute.
