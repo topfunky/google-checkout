@@ -265,8 +265,16 @@ module GoogleCheckout
       # library can't convert between
       # currencies.
       currencies = @contents.map { |item| item[:currency] }.uniq || "USD"
-      raise RuntimeError.new("Mixing currency not allowed") if currencies.count != 1
-      currencies.first
+
+      case currencies.count
+        when 0
+          "USD"
+        when 1
+          currencies.first
+        else
+          raise RuntimeError.new("Mixing currency not allowed")
+      end
+
     end
 
     # Returns the signature for the cart XML.

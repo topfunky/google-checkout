@@ -64,6 +64,11 @@ describe GoogleCheckout, "Cart (currency)" do
     @cart.currency.should == "JPY"
   end
 
+  it "should show USD for empty cart" do
+    @cart = GoogleCheckout::Cart.new("my_id", "my_key")
+    @cart.currency.should == "USD"
+  end
+
   it "should throw an exception if currencies are mixed" do
     @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
         :name => "PeepCode Screencast",
