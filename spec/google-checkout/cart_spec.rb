@@ -4,9 +4,9 @@ describe GoogleCheckout, "Cart (generic)" do
 
   before(:each) do
     @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
-      :name => "PeepCode Screencast",
-      :description => "A few screencasts",
-      :price => 9.00
+        :name => "PeepCode Screencast",
+        :description => "A few screencasts",
+        :price => 9.00
     })
     GoogleCheckout.use_sandbox
   end
@@ -35,13 +35,72 @@ describe GoogleCheckout, "Cart (generic)" do
 
 end
 
+describe GoogleCheckout, "Cart (currency)" do
+
+  it "should show correct currency if all items use the same currency" do
+    @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
+        :name => "PeepCode Screencast",
+        :description => "A few screencasts",
+        :price => 9.00,
+        :currency => "CAD"
+    })
+    @cart.currency.should == "CAD"
+    @cart.add_item(
+        :name => "PeepCode Screencast 2",
+        :description => "A few more casts",
+        :price => 9.00,
+        :currency => "CAD"
+    )
+    @cart.currency.should == "CAD"
+  end
+
+  it "should show correct currency if all items use the same currency" do
+    @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
+        :name => "PeepCode Screencast",
+        :description => "A few screencasts",
+        :price => 9.00,
+        :currency => "JPY"
+    })
+    @cart.currency.should == "JPY"
+  end
+
+  it "should throw an exception if currencies are mixed" do
+    @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
+        :name => "PeepCode Screencast",
+        :description => "A few screencasts",
+        :price => 9.00,
+        :currency => "CAD"
+    })
+    @cart.currency.should == "CAD"
+    @cart.add_item(
+        :name => "PeepCode Screencast 2",
+        :description => "A few more casts",
+        :price => 9.00,
+        :currency => "USD"
+    )
+    lambda { @cart.currency }.should raise_exception(RuntimeError, "Mixing currency not allowed")
+  end
+
+
+  it "should show USD if no currency provided" do
+    @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
+        :name => "PeepCode Screencast",
+        :description => "A few screencasts",
+        :price => 9.00
+    })
+    @cart.currency.should == "USD"
+  end
+
+
+end
+
 describe GoogleCheckout, "Cart Post" do
 
   before(:each) do
     @cart = GoogleCheckout::Cart.new("my_id", "my_key", {
-      :name => "PeepCode Screencast",
-      :description => "One screencast",
-      :price => 9.00
+        :name => "PeepCode Screencast",
+        :description => "One screencast",
+        :price => 9.00
     })
     GoogleCheckout.use_sandbox
   end
@@ -56,7 +115,7 @@ describe GoogleCheckout, "Cart Post" do
 
   it "should post request to Google" do
     # :null_object means eat all other methods and return self
-    net_http = mock("net_http", { :null_object => true })
+    net_http = mock("net_http", {:null_object => true})
     Net::HTTP.should_receive(:new).and_return(net_http)
 
     success_response = Net::HTTPSuccess.new(Net::HTTP.version_1_2, 200, "OK")
@@ -70,12 +129,12 @@ describe GoogleCheckout, "Cart Post" do
   end
 
   it "should set merchant private data" do
-    @cart.merchant_private_data = { "merchant-order-number" => "1234-5678-9012" }
+    @cart.merchant_private_data = {"merchant-order-number" => "1234-5678-9012"}
     @cart.merchant_private_data["merchant-order-number"].should == "1234-5678-9012"
   end
 
   it "should include merchant private in the generated xml" do
-    @cart.merchant_private_data = { "merchant-order-number" => "1234-5678-9012" }
+    @cart.merchant_private_data = {"merchant-order-number" => "1234-5678-9012"}
     @cart.to_xml.should match(/<merchant-order-number>1234-5678-9012<\/merchant-order-number>/)
   end
 
@@ -85,12 +144,12 @@ describe GoogleCheckout, "Cart Post" do
 
   it "should include merchant-item-id in XML if :item_id was passed with the item" do
     @cart.add_item({
-      :name => "Item",
-      :description => "Item description",
-      :price => "1.00",
-      :quantity => 1,
-      :item_id => "ITEM-007"
-    })
+                       :name => "Item",
+                       :description => "Item description",
+                       :price => "1.00",
+                       :quantity => 1,
+                       :item_id => "ITEM-007"
+                   })
     @cart.to_xml.should match(%r{<merchant-item-id>ITEM-007</merchant-item-id>})
   end
 
