@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<hoe-git>, ["= 1.3.0"])
       s.add_development_dependency(%q<rspec>, ["= 1.3.0"])
       s.add_development_dependency(%q<hoe>, [">= 2.8.0"])
+      s.add_development_dependency(%q<isolate>)
     else
       s.add_dependency(%q<builder>, [">= 0"])
       s.add_dependency(%q<nokogiri>, [">= 0"])
