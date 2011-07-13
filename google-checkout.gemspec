@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{google-checkout}
-  s.version = "0.5.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Geoffrey Grosenbach"]
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<hoe-git>, ["= 1.3.0"])
       s.add_development_dependency(%q<rspec>, ["= 1.3.0"])
       s.add_development_dependency(%q<hoe>, [">= 2.8.0"])
+      s.add_development_dependency(%q<isolate>)
     else
       s.add_dependency(%q<builder>, [">= 0"])
       s.add_dependency(%q<nokogiri>, [">= 0"])
