@@ -105,6 +105,31 @@ module GoogleCheckout
 
       @flat_rate_shipping = {:currency => 'USD'}.merge(frs_options)
     end
+    
+    # This method sets the shipping methods
+    # +options+ should be an array with hashes containing the following options:
+    # * method (must be: flat-rate shipping, )
+    # * name
+    # * price
+    # You may fill an some optional values as well:
+    # * currency (defaults to 'USD')
+    def shipping_methods(methods)
+      # We need to check that the necessary keys are in the hash,
+      # Otherwise the error will happen in the middle of to_xml,
+      # and the bug will be harder to track.
+      
+      methods.each do |method|
+        missing_keys = [ :method, :name, :price ].select { |key|
+          !method.include? key
+        }
+        unless missing_keys.empty?
+          raise ArgumentError,
+          "Required keys missing: #{missing_keys.inspect}"
+        end
+      end
+      
+      @shipping_methods = methods
+    end
 
     def empty?
       @contents.empty?
@@ -220,20 +245,23 @@ module GoogleCheckout
               }
             }
 
-            # TODO Shipping calculations
-            #      These are currently hard-coded for PeepCode.
-            #      Does anyone care to send a patch to enhance
-            #      this for more flexibility?
             xml.tag!('shipping-methods') {
-              xml.tag!('pickup', :name =>'Digital Download') {
-                xml.tag!('price', "0.00", :currency => currency)
-              }
+              if @shipping_methods
+                @shipping_methods.each { |method|
+                  xml.tag!("pickup", :name => method[:name]) {
+                    xml.tag!('price', method[:price], :currency => method[:currency] || 'USD')
+                  }
+                }
+              end
             }
+            
+            
           }
         }
       }
       @xml.dup
     end
+    
 
     # Generates the XML for the shipping cost, conditional on
     # @flat_rate_shipping being set.
