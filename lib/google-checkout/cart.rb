@@ -108,7 +108,6 @@ module GoogleCheckout
     
     # This method sets the shipping methods
     # +options+ should be an array with hashes containing the following options:
-    # * method (must be: flat-rate shipping, )
     # * name
     # * price
     # You may fill an some optional values as well:
@@ -119,7 +118,7 @@ module GoogleCheckout
       # and the bug will be harder to track.
       
       methods.each do |method|
-        missing_keys = [ :method, :name, :price ].select { |key|
+        missing_keys = [ :name, :price ].select { |key|
           !method.include? key
         }
         unless missing_keys.empty?
