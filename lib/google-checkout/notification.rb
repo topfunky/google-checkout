@@ -104,7 +104,8 @@ module GoogleCheckout
       xml = Builder::XmlMarkup.new
       xml.instruct!
       @xml = xml.tag!('notification-acknowledgment', {
-                        :xmlns => "http://checkout.google.com/schema/2"
+                        :xmlns => "http://checkout.google.com/schema/2",
+                        'serial-number' => serial_number
                       })
       @xml
     end
